@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Tin Tức & Thông Báo VPA</title>
+    <!-- Tải Tailwind CSS từ CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Thiết lập font Inter mặc định (Tailwind font-sans) -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Container chính để ứng dụng JS render nội dung vào -->
+    <div id="app-root" class="min-h-screen flex flex-col font-sans antialiased">
+        <!-- Nội dung sẽ được chèn bởi JavaScript -->
+        <div class="text-center py-20">Đang tải nội dung...</div>
+    </div>
+    
+    <!-- Tải file JavaScript -->
+    <script src="newsSections.js"></script>
+</body>
+</html>

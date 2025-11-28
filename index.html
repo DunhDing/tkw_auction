@@ -1,74 +1,149 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - Dự Án Đấu Giá Trực Tuyến VPA</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
 
-    <header class="main-header">
-        <div class="container header-content">
-            <div class="logo">
-                <a href="#" class="nav-link" data-target="trang-chu">VPA Auction</a>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Định cấu hình màu tùy chỉnh để tái tạo màu Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Màu chính (Đỏ VPA)
+                        vpaRed: '#be1e2d',
+                        // Màu phụ (Vàng/Cam)
+                        vpaGold: '#fbb03b',
+                        // Màu nền dịch vụ
+                        vpaServiceBg: '#fff9e6',
+                        // Màu footer
+                        vpaDark: '#2a0a0a',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* CSS bổ sung để xử lý menu toggle và các hiệu ứng phức tạp */
+        .mobile-menu {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .mobile-menu.active {
+            max-height: 500px;
+            /* Giá trị lớn hơn nội dung menu */
+            opacity: 1;
+        }
+
+        /* CSS cho các icon Zalo */
+        .btn-zalo {
+            background-color: #0084ff;
+            /* Zalo color approximation */
+            font-size: 10px;
+        }
+
+        /* Tùy chỉnh thanh cuộn cho partner section */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-900">
+
+    <header id="main-header" class="w-full">
+        <div class="bg-white shadow-md sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+
+                <a id="logo-link" href="index.html" data-target="home" class="flex items-center gap-2 cursor-pointer">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-red-600 rounded-lg flex items-center justify-center transform rotate-45 shadow-lg">
+                        <div class="w-6 h-6 bg-white transform -rotate-45"
+                            style="clip-path: polygon(50% 0%, 0% 100%, 100% 100%);"></div>
+                    </div>
+                    <span class="text-3xl font-extrabold text-vpaRed tracking-tight">VPA</span>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-8 font-medium text-sm xl:text-base">
+                    <nav id="desktop-nav" class="flex items-center gap-6" aria-label="Điều hướng chính">
+                        <a href="index.html" data-target="home" class="nav-link text-vpaRed font-bold active">Trang
+                            chủ</a>
+                        <a href="CarAuction/carAuction.html" data-target="cars" class="nav-link text-gray-700 hover:text-vpaRed">Đấu giá biển số xe ô tô</a>
+                        <a href="MotorbikeAuction/motorbikeAuction.html" data-target="motorbikes" class="nav-link text-gray-700 hover:text-vpaRed">Đấu giá biển số xe máy</a>
+                        <a href="AssetAuction/assetAuction.html" data-target="assets" class="nav-link text-gray-700 hover:text-vpaRed">Đấu giá tài sản</a>
+                        
+                        <a href="NewsSections/newsSections.html" data-target="news" class="nav-link text-gray-700 hover:text-vpaRed">Tin tức</a>
+                        <a href="Plan/planAuction.html" data-target="notifications" class="nav-link text-gray-700 hover:text-vpaRed">Kế hoạch</a>
+                        <a href="TrangChu/home.html" data-target="about" class="nav-link text-gray-700 hover:text-vpaRed">Giới thiệu</a>
+                    </nav>
+
+                    <div class="flex items-center gap-4 pl-8 border-l border-gray-200">
+                        <a href="Login/login.html" id="login-btn-desktop" data-target="login"
+                            class="flex items-center justify-center gap-1 text-white bg-vpaRed px-4 py-2 rounded-full hover:bg-red-700 transition-colors font-semibold shadow-md shadow-red-300/50 transform hover:scale-[1.02] active:scale-100 whitespace-nowrap">
+                            <i class="fas fa-user" style="font-size: 14px;"></i> Đăng nhập
+                        </a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 lg:hidden">
+                    <button id="menu-toggle" class="text-gray-700 p-1 focus:outline-none" aria-expanded="false"
+                        aria-controls="mobile-menu-dropdown" aria-label="Mở menu">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
-            <nav class="main-nav" id="main-nav">
-                <ul>
-                    <li><a href="#" class="nav-link active" data-target="trang-chu">Trang Chủ</a></li>
-                    <li><a href="#" class="nav-link" data-target="dau-gia-truc-tuyen">Đấu Giá Trực Tuyến</a></li>
-                    <li><a href="#" class="nav-link" data-target="dich-vu">Dịch Vụ</a></li>
-                    <li><a href="#" class="nav-link" data-target="tin-tuc">Tin Tức & Thông Báo</a></li>
-                    <li><a href="#" class="nav-link" data-target="lien-he">Liên Hệ</a></li>
-                </ul>
+
+            <nav id="mobile-menu-dropdown"
+                class="mobile-menu lg:hidden bg-white border-t border-gray-100 absolute w-full left-0 z-40 shadow-xl rounded-b-lg">
+                <div class="flex flex-col p-4 space-y-2 font-medium">
+                    <div class="flex items-center justify-center py-2 border-b border-gray-100 mb-2">
+                        <a href="Login/login.html" id="login-btn-mobile" data-target="login"
+                            class="flex items-center justify-center gap-1 text-white bg-vpaRed px-6 py-2 rounded-full hover:bg-red-700 transition-colors font-semibold shadow-md">
+                            <i class="fas fa-user" style="font-size: 14px;"></i> Đăng nhập
+                        </a>
+                    </div>
+                    <a href="index.html" data-target="home"
+                        class="nav-link mobile-nav-class text-vpaRed font-bold active">Trang chủ</a>
+                    <a href="CarAuction/carAuction.html" data-target="cars" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Đấu giá biển số xe ô tô</a>
+                    <a href="MotorbikeAuction/motorbikeAuction.html" data-target="motorbikes" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Đấu giá biển số xe máy</a>
+                    <a href="AssetAuction/assetAuction.html" data-target="assets" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Đấu giá tài sản</a>
+                    
+                    <a href="NewsSections/newsSections.html" data-target="news" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Tin tức</a>
+                    <a href="Plan/planAuction.html" data-target="notifications" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Kế hoạch</a>
+                    <!-- <a href="TrangChu/home.html" data-target="about" class="nav-link mobile-nav-class text-gray-700 hover:text-vpaRed">Giới thiệu</a> -->
+                </div>
             </nav>
-            <div class="user-actions">
-                <a href="#" class="btn btn-login">Đăng Nhập</a>
-                <a href="#" class="btn btn-register">Đăng Ký</a>
-            </div>
-            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </header>
 
-    <main id="main-content">
-        <div class="container" style="text-align: center; padding: 50px;">
-            <p>Đang tải nội dung...</p>
+    <main id="main-content" class="min-h-screen">
+        <div class="flex justify-center items-center h-48">
+            <p class="text-lg text-gray-500">Đang tải nội dung...</p>
         </div>
     </main>
 
-    <footer class="main-footer">
-        <div class="container footer-grid">
-            <div class="footer-col about">
-                <h4>Công ty Đấu giá Hợp danh Việt Nam</h4>
-                <p>Nâng tầm giá trị tài sản. Hoạt động chuyên nghiệp trong lĩnh vực đấu giá tài sản trực tuyến.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-col links">
-                <h4>Hỗ Trợ Khách Hàng</h4>
-                <ul>
-                    <li><a href="#">Chính sách bảo mật</a></li>
-                    <li><a href="#">Điều khoản sử dụng</a></li>
-                    <li><a href="#">Hướng dẫn đấu giá</a></li>
-                </ul>
-            </div>
-            <div class="footer-col contact">
-                <h4>Liên Hệ</h4>
-                <p><i class="fas fa-map-marker-alt"></i> Trụ sở chính: Tầng 4, tòa nhà NO2...</p>
-                <p><i class="fas fa-phone"></i> Hotline CSKH: 1900.0555.15</p>
-                <p><i class="fas fa-envelope"></i> Email: info@vpa.com.vn</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Bản quyền thuộc về VPA Auction. All Rights Reserved.</p>
-        </div>
+    <footer id="main-footer">
     </footer>
 
-    <script src="script.js"></script>
+    <div id="floating-actions">
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
+
 </html>

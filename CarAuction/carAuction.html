@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPA - Sàn Đấu Giá Trực Tuyến</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        /* Custom style for the date input icon to make it look nicer */
+        .date-input-container {
+            position: relative;
+        }
+        .date-input-container input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .date-input-icon {
+            position: absolute;
+            right: 0.75rem; /* right-3 */
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: rgb(156 163 175); /* text-gray-400 */
+        }
+        /* Fix for color-scheme issue on date inputs in some browsers */
+        input[type="date"] {
+            color-scheme: light;
+        }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="app" class="font-sans antialiased text-gray-900">
+        </div>
+
+    <script type="module" src="./carAuction.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Wait for script.js to render the initial content before replacing icons
+            setTimeout(() => {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>
